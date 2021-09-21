@@ -92,20 +92,6 @@ pipeline:
                               variables: []
                               manifests:
                                   - manifest:
-                                        identifier: values
-                                        type: K8sManifest
-                                        spec:
-                                            store:
-                                                type: Github
-                                                spec:
-                                                    connectorRef: githubclucca13
-                                                    gitFetchType: Branch
-                                                    paths:
-                                                        - " harness-deploy/values.yaml"
-                                                    repoName: harness-cie-lab
-                                                    branch: main
-                                            skipResourceVersioning: false
-                                  - manifest:
                                         identifier: templates
                                         type: K8sManifest
                                         spec:
@@ -119,6 +105,19 @@ pipeline:
                                                     repoName: harness-cie-lab
                                                     branch: main
                                             skipResourceVersioning: false
+                                  - manifest:
+                                        identifier: values
+                                        type: Values
+                                        spec:
+                                            store:
+                                                type: Github
+                                                spec:
+                                                    connectorRef: githubclucca13
+                                                    gitFetchType: Branch
+                                                    paths:
+                                                        - harness-deploy/values.yaml
+                                                    repoName: harness-cie-lab
+                                                    branch: main
                               artifacts:
                                   primary:
                                       type: DockerRegistry
